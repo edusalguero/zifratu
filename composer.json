@@ -1,0 +1,22 @@
+{
+    "name": "edusalguero/zifratu",
+    "description": "A PHP library to encrypt and decrypt using AES in a MySQL compatible way",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "edusalguero",
+            "email": "edusalguero@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "EduSalguero\\Zifratu\\": "src",
+            "EduSalguero\\Zifratu\\Tests\\": "test"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
