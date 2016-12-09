@@ -9,7 +9,9 @@
             "email": "edusalguero@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "ext-mcrypt":"*"
+    },
     "autoload": {
         "psr-4": {
             "EduSalguero\\Zifratu\\": "src",
