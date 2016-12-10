@@ -39,12 +39,11 @@ class Decrypter
     {
         $value = base64_decode($value);
         $key = $this->secret;
-        $value = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $value, MCRYPT_MODE_ECB,
-                              mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128,
-                                                                  MCRYPT_MODE_ECB),
-                                               MCRYPT_DEV_URANDOM));
 
-        return rtrim($value, "\0..\16");
+        $iv = substr($key, 0, 16);
+        return openssl_decrypt($value, 'AES128', $key, 0, $iv);
+
+
     }
 
 }

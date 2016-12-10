@@ -38,14 +38,11 @@ class Encrypter
     public function encrypt($value)
     {
         $key = $this->secret;
-        $pad_value = 16 - (strlen($value) % 16);
-        $value = str_pad($value, (16 * (floor(strlen($value) / 16) + 1)), chr($pad_value));
-        $encryptVal = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $value, MCRYPT_MODE_ECB,
-                                     mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128,
-                                                                         MCRYPT_MODE_ECB),
-                                                      MCRYPT_DEV_URANDOM));
 
-        return base64_encode($encryptVal);
+
+        $iv = substr($key, 0, 16);
+       return base64_encode(openssl_encrypt($value, 'AES128', $key, 0, $iv));
+      
         
     }
     

@@ -21,9 +21,9 @@ class ZifratuTest extends TestCase
     public function configSuccessProvider()
     {
         return [
-            ['my secret key', 'test', 'G+/dWZ00ZZxWuT8h1mqJ2g=='],
-            ['my aes secret key', 'test', 'xJHq1/OpPxUj7y1sgR0ycA=='],
-            ['mysecretseedingkey', 'foobar', 'n93BGuQ3eQTCqiMvcfRoLg==']
+            ['my secret key', 'test', 'b2pEcFJpdGFIMTJXZVYvM1pINE5Vdz09'],
+            ['my aes secret key', 'test', 'WDZPcmtaN1E1cW92Qms5eUxyS0lIQT09'],
+            ['mysecretseedingkey', 'foobar', 'YjJXOW8rQU9adkVtRjVBTmJqOXN2Zz09']
         ];
     }
 
