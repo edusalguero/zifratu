@@ -6,7 +6,7 @@ namespace EduSalguero\Zifratu\Test;
 
 use EduSalguero\Zifratu\Decrypter;
 use EduSalguero\Zifratu\Encrypter;
-use EduSalguero\Zifratu\KeyGenerator\MySQLSurrounder;
+use EduSalguero\Zifratu\SecretGenerator\Md5Surrounder;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,9 +21,9 @@ class ZifratuTest extends TestCase
     public function configSuccessProvider()
     {
         return [
-            ['my secret key', 'test', 'WqD/0kC6CZTBFxngSaJ5Og=='],
-            ['my aes secret key', 'test', 'EYyFji7J7njhKCZH78VbzA=='],
-            ['mysecretseedingkey', 'foobar', 'iWSjHbqpoNOPS6p1FsyyZw==']
+            ['my secret key', 'test', 'G+/dWZ00ZZxWuT8h1mqJ2g=='],
+            ['my aes secret key', 'test', 'xJHq1/OpPxUj7y1sgR0ycA=='],
+            ['mysecretseedingkey', 'foobar', 'n93BGuQ3eQTCqiMvcfRoLg==']
         ];
     }
 
@@ -46,7 +46,7 @@ class ZifratuTest extends TestCase
      */
     public function test_decrypt_success($secret, $decrypted, $encrypted)
     {
-        $aesKey = new  MySQLSurrounder();
+        $aesKey = new  Md5Surrounder();
         $decrypter = new Decrypter($aesKey, $secret);
         $this->assertEquals($decrypted, $decrypter->decrypt($encrypted));
 
@@ -61,7 +61,7 @@ class ZifratuTest extends TestCase
      */
     public function test_encrypt_success($secret, $decrypted, $encrypted)
     {
-        $aesKey = new  MySQLSurrounder();
+        $aesKey = new  Md5Surrounder();
         $encrypter = new Encrypter($aesKey, $secret);
         $this->assertEquals($encrypted, $encrypter->encrypt($decrypted));
     }
@@ -75,7 +75,7 @@ class ZifratuTest extends TestCase
      */
     public function test_decrypt_fail($secret, $decrypted, $encrypted)
     {
-        $aesKey = new  MySQLSurrounder();
+        $aesKey = new  Md5Surrounder();
         $decrypter = new Decrypter($aesKey, $secret);
         $this->assertNotEquals($decrypted, $decrypter->decrypt($encrypted));
 
@@ -90,7 +90,7 @@ class ZifratuTest extends TestCase
      */
     public function test_encrypt_fail($secret, $decrypted, $encrypted)
     {
-        $aesKey = new  MySQLSurrounder();
+        $aesKey = new  Md5Surrounder();
         $encrypter = new Encrypter($aesKey, $secret);
         $this->assertNotEquals($encrypted, $encrypter->encrypt($decrypted));
     }

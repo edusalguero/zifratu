@@ -3,7 +3,7 @@
 
 namespace EduSalguero\Zifratu;
 
-use EduSalguero\Zifratu\KeyGenerator\AesKeyGeneratorInterface;
+use EduSalguero\Zifratu\SecretGenerator\SecretGeneratorInterface;
 
 
 /**
@@ -15,18 +15,18 @@ class Encrypter
     /**
      * @var string
      */
-    protected $aesKey;
+    protected $secret;
 
 
     /**
      * Encrypter constructor.
      *
-     * @param AesKeyGeneratorInterface $aesKeyGenerator
+     * @param SecretGeneratorInterface $secretGenerator
      * @param string $secret
      */
-    public function __construct(AesKeyGeneratorInterface $aesKeyGenerator, $secret)
+    public function __construct(SecretGeneratorInterface $secretGenerator, $secret)
     {
-       $this->aesKey = $aesKeyGenerator->build($secret);
+       $this->secret = $secretGenerator->build($secret);
     }
 
     /**
@@ -37,7 +37,7 @@ class Encrypter
      */
     public function encrypt($value)
     {
-        $key = $this->aesKey;
+        $key = $this->secret;
         $pad_value = 16 - (strlen($value) % 16);
         $value = str_pad($value, (16 * (floor(strlen($value) / 16) + 1)), chr($pad_value));
         $encryptVal = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $value, MCRYPT_MODE_ECB,

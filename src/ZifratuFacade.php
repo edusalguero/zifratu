@@ -12,9 +12,9 @@ class ZifratuFacade
 {
 
     /**
-     * @var KeyGenerator\MySQLSurrounder
+     * @var SecretGenerator\Md5Surrounder
      */
-    protected $aesKeyGenerator;
+    protected $secretKeyGenerator;
     /**
      * @var string
      */
@@ -22,10 +22,12 @@ class ZifratuFacade
 
     /**
      * ZifratuFacade constructor.
+     *
+     * @param $secret
      */
     public function __construct($secret)
     {
-        $this->aesKeyGenerator = new KeyGenerator\MySQLSurrounder();
+        $this->secretKeyGenerator = new SecretGenerator\Md5Surrounder();
         $this->secret = $secret;
     }
 
@@ -38,7 +40,7 @@ class ZifratuFacade
      */
     public function encrypt($value)
     {
-        $decripter = new Encrypter($this->aesKeyGenerator, $this->secret);
+        $decripter = new Encrypter($this->secretKeyGenerator, $this->secret);
 
         return $decripter->encrypt($value);
     }
@@ -51,7 +53,7 @@ class ZifratuFacade
      */
     public function decrypt($value)
     {
-        $decripter = new Decrypter($this->aesKeyGenerator, $this->secret);
+        $decripter = new Decrypter($this->secretKeyGenerator, $this->secret);
 
         return $decripter->decrypt($value);
     }

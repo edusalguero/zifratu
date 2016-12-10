@@ -3,7 +3,7 @@
 
 namespace EduSalguero\Zifratu;
 
-use EduSalguero\Zifratu\KeyGenerator\AesKeyGeneratorInterface;
+use EduSalguero\Zifratu\SecretGenerator\SecretGeneratorInterface;
 
 
 /**
@@ -16,18 +16,18 @@ class Decrypter
     /**
      * @var string
      */
-    protected $aesKey;
+    protected $secret;
 
 
     /**
      * Decrypter constructor.
      *
-     * @param AesKeyGeneratorInterface $aesKeyGenerator
+     * @param SecretGeneratorInterface $secretGenerator
      * @param string $secret
      */
-    public function __construct(AesKeyGeneratorInterface $aesKeyGenerator, $secret)
+    public function __construct(SecretGeneratorInterface $secretGenerator, $secret)
     {
-        $this->aesKey = $aesKeyGenerator->build($secret);
+        $this->secret = $secretGenerator->build($secret);
     }
 
     /**
@@ -38,7 +38,7 @@ class Decrypter
     public function decrypt($value)
     {
         $value = base64_decode($value);
-        $key = $this->aesKey;
+        $key = $this->secret;
         $value = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $value, MCRYPT_MODE_ECB,
                               mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128,
                                                                   MCRYPT_MODE_ECB),
