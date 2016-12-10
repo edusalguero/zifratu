@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$key = 'my secret key';
+$key = 'my secure key';
 
 $valueToSecure = 'test';
 $aesKeyGenerator = new \EduSalguero\Zifratu\SecretGenerator\Md5Surrounder();
@@ -17,9 +17,3 @@ printf('Secret hash: %s'.PHP_EOL, $aesKey);
 printf('Value to secure: %s' . PHP_EOL, $valueToSecure);
 printf('Encrypted value: %s' . PHP_EOL, $encryptedValue);
 printf('Decrypted value: %s' . PHP_EOL, $decryptedValue);
-
-/*
-$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('AES-128'));
-$encrypted = openssl_encrypt($valueToSecure, 'AES-128', $aesKey, 0, $iv);
-
-print_r($encrypted);*/
