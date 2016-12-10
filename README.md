@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/edusalguero/zifratu.svg?branch=master)](https://travis-ci.org/edusalguero/zifratu)
+
 # Zifratu
 
 Zifratu is a simple PHP library to encrypt and decrypt using AES in a MySQL compatible way
