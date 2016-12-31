@@ -32,6 +32,20 @@ class ZifratuFacade
     }
 
     /**
+     * Named constructor
+     *
+     * @param $secret
+     *
+     * @return static
+     */
+    public static function create($secret)
+    {
+        $facade = new static($secret);
+
+        return $facade;
+    }
+
+    /**
      * Encrypt a value with a given secret using AES
      *
      * @param string $value
@@ -47,6 +61,7 @@ class ZifratuFacade
 
     /**
      * Decrypt a value with a given secret using AES
+     *
      * @param string $value
      *
      * @return string

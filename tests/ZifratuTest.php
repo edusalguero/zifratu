@@ -7,6 +7,7 @@ namespace EduSalguero\Zifratu\Test;
 use EduSalguero\Zifratu\Decrypter;
 use EduSalguero\Zifratu\Encrypter;
 use EduSalguero\Zifratu\SecretGenerator\Md5Surrounder;
+use EduSalguero\Zifratu\ZifratuFacade;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -93,5 +94,33 @@ class ZifratuTest extends TestCase
         $aesKey = new  Md5Surrounder();
         $encrypter = new Encrypter($aesKey, $secret);
         $this->assertNotEquals($encrypted, $encrypter->encrypt($decrypted));
+    }
+
+    /**
+     * @dataProvider configSuccessProvider
+     *
+     * @param $secret
+     * @param $decrypted
+     * @param $encrypted
+     */
+    public function test_facade_sucess($secret, $decrypted, $encrypted)
+    {
+        $facade = ZifratuFacade::create($secret);
+        $this->assertEquals($encrypted,$facade->encrypt($decrypted));
+        $this->assertEquals($decrypted,$facade->decrypt($encrypted));
+    }
+
+    /**
+     * @dataProvider configFailProvider
+     *
+     * @param $secret
+     * @param $decrypted
+     * @param $encrypted
+     */
+    public function test_facade_fail($secret, $decrypted, $encrypted)
+    {
+        $facade = ZifratuFacade::create($secret);
+        $this->assertNotEquals($encrypted,$facade->encrypt($decrypted));
+        $this->assertNotEquals($decrypted,$facade->decrypt($encrypted));
     }
 }
