@@ -3,7 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $secret = 'my secret key';
 $valueToSecure = 'test';
-$zifratu = new \EduSalguero\Zifratu\ZifratuFacade($secret);
+$zifratu = \EduSalguero\Zifratu\ZifratuFacade::create($secret);
 
 $encryptedValue = $zifratu->encrypt($valueToSecure);
 $decryptedValue = $zifratu->decrypt($encryptedValue);
