@@ -26,11 +26,12 @@ class Encrypter
      */
     public function __construct(SecretGeneratorInterface $secretGenerator, $secret)
     {
-       $this->secret = $secretGenerator->build($secret);
+        $this->secret = $secretGenerator->build($secret);
     }
 
     /**
      * Encrypt a string and returns the encripted value in base64
+     *
      * @param string $value The value to encrypt
      *
      * @return string
@@ -38,14 +39,10 @@ class Encrypter
     public function encrypt($value)
     {
         $key = $this->secret;
-
-
         $iv = substr($key, 0, 16);
-       return base64_encode(openssl_encrypt($value, 'AES128', $key, 0, $iv));
-      
-        
+
+        return base64_encode(openssl_encrypt($value, 'AES128', $key, 0, $iv));
     }
-    
 
 
 }

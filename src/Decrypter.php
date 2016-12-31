@@ -39,11 +39,9 @@ class Decrypter
     {
         $value = base64_decode($value);
         $key = $this->secret;
-
         $iv = substr($key, 0, 16);
+
         return openssl_decrypt($value, 'AES128', $key, 0, $iv);
-
-
     }
 
 }
